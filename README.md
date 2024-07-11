@@ -1,14 +1,14 @@
-# CopyRNeRF
+# Imaging Interiors: An Implicit Solution to Electromagnetic Inverse Scattering Problems
 
-This is the repository that contains source code for the project page of [CopyRNeRF](https://luo-ziyuan.github.io/copyrnerf/).
+This is the repository that contains source code for the project page of [Imaging Interiors: An Implicit Solution to Electromagnetic Inverse Scattering Problems](https://luo-ziyuan.github.io/Imaging-Interiors/).
 
-If you find CopyRNeRF useful for your work please cite:
+If you find our paper useful for your work please cite:
 ```
-@inproceedings{luo2023copyrnerf,
-  author    = {Ziyuan Luo and Qing Guo and Ka Chun Cheung and Simon See and Renjie Wan},
-  title     = {Copy{RN}e{RF}: Protecting the CopyRight of Neural Radiance Fields},
-  booktitle   = {Proceedings of the IEEE/CVF International Conference on Computer Vision},
-  year      = {2023},
+@inproceedings{luo2024imaging,
+  author    = {Ziyuan Luo and Boxin Shi and Haoliang Li and Renjie Wan},
+  title     = {Imaging Interiors: An Implicit Solution to Electromagnetic Inverse Scattering Problems},
+  booktitle   = {European Conference on Computer Vision},
+  year      = {2024},
 }
 ```
 
