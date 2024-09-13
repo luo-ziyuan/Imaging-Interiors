@@ -128,6 +128,65 @@
   </div>
 </section>
 
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Figure_1. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <div style="text-align: center;">
+          <img src="assets/fig_1.png" alt="Figure 1"  width="60%"/>
+        </div>
+      </div>
+    </div>
+    <!--/ Figure_1. -->
+    
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Electromagnetic Inverse Scattering Problems (EISP) have gained wide applications in computational imaging. By solving EISP, 
+            the internal relative permittivity of the scatterer can be non-invasively determined based on the scattered electromagnetic 
+            fields. Despite previous efforts to address EISP, achieving better solutions to this problem has remained elusive, due to 
+            the challenges posed by inversion and discretization. This paper tackles those challenges in EISP via an implicit approach. 
+            By representing the scatterer's relative permittivity as a continuous implicit representation, our method is able to address 
+            the low-resolution problems arising from discretization. Further, optimizing this implicit representation within a forward 
+            framework allows us to conveniently circumvent the challenges posed by inverse estimation. Our approach outperforms existing
+            methods on standard benchmark datasets.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+    <div class="column is-centered has-text-centered">
+      <h2 class="title is-3">Framework</h2>
+    </div>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <section class="hero is-light is-small">
+          <div class="hero-body">
+            <div class="container">
+                <div style="text-align: center;">
+                  <img src="assets/framework.png" alt="Figure 1"  width="100%"/>
+                </div>
+                <div class="content has-text-justified">
+                  <p>Overview of our implicit method. Two MLPs, $F_\theta$ and $H_\phi$, are used to implicitly represent relative permittivity $\varepsilon_r$ and induced current $J$, respectively. Random sampling is applied for comprehensive optimization. The predicted induced current $\hat{\mathbf{J}}$ is calculated based on relative permittivity $\varepsilon_r$ queried from $F_\theta$ and induced current $J$ directly queried from $H_\phi$. Then the state loss $\mathcal{L}_{\text{state}}$ is calculated by comparing the predicted $\hat{\mathbf{J}}$ and directly queried $\mathbf{J}$. Besides, the directly queried induced current $\mathbf{J}$ is used to compute the scattered fields $\hat{\mathbf{E}}^{\text{s}}$. Data loss function $\mathcal{L}_{\text{data}}$ is constructed to evaluate the difference between predicted scattered fields $\hat{\mathbf{E}}^{\text{s}}$ and the measured values $\mathbf{E}^{\text{s}}$.
+</p>
+                </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+    <!--/ Paper video. -->
+
+  </div>
+</section>
+
+
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
