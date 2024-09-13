@@ -174,9 +174,13 @@
                 </div>
                 <div class="content has-text-justified">
                   <p>
-                  Overview of our implicit method. Two MLPs, \( F_\theta \) <span class="math">F<sub>θ</sub></span> and <span class="math">H<sub>φ</sub></span>, are used to implicitly represent relative permittivity <span class="math">ε<sub>r</sub></span> and induced current <span class="math">J</span>, respectively. Random sampling is applied for comprehensive optimization. The predicted induced current <span class="math">Ĵ</span> is calculated based on relative permittivity <span class="math">ε<sub>r</sub></span> queried from <span class="math">F<sub>θ</sub></span> and induced current <span class="math">J</span> directly queried from <span class="math">H<sub>φ</sub></span>. Then the state loss <span class="math">L<sub>state</sub></span> is calculated by comparing the predicted <span class="math">Ĵ</span> and directly queried <span class="math">J</span>.
-                  Besides, the directly queried induced current <span class="math">J</span> is used to compute the scattered fields <span class="math">Ê<sup>s</sup></span>. Data loss function <span class="math">L<sub>data</sub></span> is constructed to evaluate the difference between predicted scattered fields <span class="math">Ê<sup>s</sup></span> and the measured values <span class="math">E<sup>s</sup></span>.  
-                  </p>
+                  Overview of our implicit method. Two MLPs, \(F_\theta\) and \(H_\phi\), are used to 
+                    implicitly represent relative permittivity \(\varepsilon_r\) and induced current \(J\), 
+                    respectively. Random sampling is applied for comprehensive optimization. The predicted 
+                    induced current \(\hat{\mathbf{J}}\) is calculated based on relative permittivity \(\varepsilon_r\) 
+                    queried from \(F_\theta\) and induced current \(J\) directly queried from \(H_\phi\). Then the state loss \(\mathcal{L}_{\text{state}}\) 
+                    is calculated by comparing the predicted \(\hat{\mathbf{J}}\) and directly queried \(\mathbf{J}\).
+                    Besides, the directly queried induced current \(\mathbf{J}\) is used to compute the scattered fields \(\hat{\mathbf{E}}^{\text{s}}\). Data loss function \(\mathcal{L}_{\text{data}}\) is constructed to evaluate the difference between predicted scattered fields \(\hat{\mathbf{E}}^{\text{s}}\) and the measured values \(\mathbf{E}^{\text{s}}\).</p>
                 </div>
             </div>
           </div>
