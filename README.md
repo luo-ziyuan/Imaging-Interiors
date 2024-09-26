@@ -2,6 +2,13 @@
 
 This is the repository that contains source code for the project page of [Imaging Interiors: An Implicit Solution to Electromagnetic Inverse Scattering Problems](https://luo-ziyuan.github.io/Imaging-Interiors/).
 
+## Quick Start
+To run a case of the Austria profile, just execute the following command:
+``` bash
+python run_isp_double_MLP_L1.py --config configs/circle_double_MLP_Au_L1.txt
+```
+The data is generated from [this GitHub repository](https://github.com/eleweiz/Solving-full-wave-nonlinear-inverse-scattering-problems-with-back-propagation-scheme).
+
 If you find our paper useful for your work please cite:
 ```
 @inproceedings{luo2024imaging,

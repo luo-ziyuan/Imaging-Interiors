@@ -1,0 +1,4 @@
+expname = Au_L1
+basedir = ./logs
+datadir = ./data/Au
+
