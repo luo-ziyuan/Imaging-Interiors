@@ -1,1 +1,4 @@
 data/*
+.idea/*
+logs/*
+__pycache__/*

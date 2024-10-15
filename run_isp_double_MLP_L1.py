@@ -76,7 +76,7 @@ def render(freq, H, W, N_cell, E_inc, Phi_mat, R_mat, input,input_J,  network_fn
     xi_E_inc = xi_forward_mat @ E_inc
     re['J_state'] = xi_E_inc + xi_forward_mat @ Phi_mat @ J
 
-    re['norm_xi_E_inc'] = torch.mean(xi_E_inc.real ** 2 + xi_E_inc.real ** 2)
+    re['norm_xi_E_inc'] = torch.mean(xi_E_inc.real ** 2 + xi_E_inc.imag ** 2)
     # xi_forward_numpy = xi_forward.cpu().numpy()
     # aa = torch.eye(N_cell)
     # bb = torch.diag_embed(xi_forward.squeeze(-1))
@@ -189,6 +189,8 @@ def config_parser():
 
     parser.add_argument("--noise_ratio", type=float, default=0.05,
                         help='noise_ratio')
+    parser.add_argument("--sample_perturb", type=float, default=0.005,
+                        help='random sample perturbation')
 
     return parser
 
@@ -214,13 +216,13 @@ def train():
 
     N_cell = Mx * Mx
 
-    coords_inc = torch.cat(
-        (torch.reshape(xy_dom.transpose(0, 1), [-1, 2]).unsqueeze(-2).repeat([1, N_inc, 1]),
-         xy_t.unsqueeze(0).repeat([N_cell, 1, 1])), -1)
-    # coords_inc_numpy = coords_inc.cpu().numpy()
+    # coords_inc = torch.cat(
+    #     (torch.reshape(xy_dom.transpose(0, 1), [-1, 2]).unsqueeze(-2).repeat([1, N_inc, 1]),
+    #      xy_t.unsqueeze(0).repeat([N_cell, 1, 1])), -1)
+
     # Load data
     freq = 0.4
-    # freq_dir = 'freq'
+
     gt_real = np.load(os.path.join(args.datadir, 'E_s_real.npy'))
     gt_imag = np.load(os.path.join(args.datadir, 'E_s_imag.npy'))
     if args.noise_ratio != 0:
@@ -285,8 +287,6 @@ def train():
     with torch.no_grad():
         fn_test = render_kwargs_test['network_query_fn']
         output = fn_test(xy_dom, render_kwargs_test['network_fn'])
-        epsilon_loss = 0
-        # print('epsilon_loss: ', epsilon_loss.item())
         np.save(testsavedir, output.squeeze(-1).cpu().numpy())
     print('Saved test set')
 
@@ -297,7 +297,11 @@ def train():
 
 
     for i in trange(start, N_iters):
-        time0 = time.time()
+        xy_dom_random = xy_dom + torch.randn_like(xy_dom) * args.sample_perturb
+        # xy_dom_random = xy_dom
+        coords_inc = torch.cat(
+            (torch.reshape(xy_dom_random.transpose(0, 1), [-1, 2]).unsqueeze(-2).repeat([1, N_inc, 1]),
+             xy_t.unsqueeze(0).repeat([N_cell, 1, 1])), -1)
 
         #####  Core optimization loop  #####
         re = render(freq, H, W, N_cell=N_cell, E_inc=E_inc, Phi_mat=Phi_mat, R_mat=R_mat, input=xy_dom, input_J=coords_inc, **render_kwargs_train)
@@ -309,7 +313,7 @@ def train():
 
         TV_loss = loss_TV(re['epsilon'])
         # loss = img_loss
-        if global_step <= 12000:
+        if global_step <= 2000:
             loss = (img_loss_data + img_loss_state)
         else:
             loss = (img_loss_data + img_loss_state + 0.01*TV_loss)
@@ -346,7 +350,6 @@ def train():
             with torch.no_grad():
                 fn_test = render_kwargs_test['network_query_fn']
                 output = fn_test(xy_dom, render_kwargs_test['network_fn'])
-                epsilon_loss = 0
                 # print('epsilon_loss: ', epsilon_loss.item())
                 output = output.squeeze(-1).cpu().numpy()
                 np.save(testsavedir, output)
